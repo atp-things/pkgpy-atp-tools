@@ -9,7 +9,7 @@ increment_version() {
   echo $(local IFS=$delimiter ; echo "${array[*]}")
 }
 
-release_string="$(python setup.py --version | grep -Eo '^[0-9]+\.[0-9]+\.[0-9]+')"
+release_string="$(setuptools-git-versioning | grep -Eo '^[0-9]+\.[0-9]+\.[0-9]+')"
 
 echo "Version (last) $release_string"
 # $release_string
