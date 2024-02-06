@@ -1,0 +1,27 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+# tools
+setuptools = "*"
+build = "*"
+pre-commit = "*"
+versioneer = "*"
+black = "*"
+flake8 = "*"
+pep8-naming = "*"
+pprintpp = "*"
+pytest = "*"
+jsonschema = "*"
+pandas = "*"
+setuptools-git-versioning = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
+
+[scripts]
+tests = "pytest tests -x"
