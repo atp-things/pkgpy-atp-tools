@@ -19,7 +19,8 @@
     },
     "metadata": {
       "description": "metadata",
-      "type": "object"
+      "type": "object",
+      "properties": {}
     },
     "data": {
       "description": "measurement data",
