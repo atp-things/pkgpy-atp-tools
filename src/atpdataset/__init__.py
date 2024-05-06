@@ -9,4 +9,7 @@
 
 from importlib.metadata import version
 
+from . import csv
+from .dataset import AtpDataset
+
 __version__ = version("atpdataset")
