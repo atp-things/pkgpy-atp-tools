@@ -1,0 +1,8 @@
+{
+  "name": "Data sample",
+  "manufacturer": "Lascar Electronics",
+  "model": "EL-USB-1-PRO",
+  "description": "High temperatue data logger",
+  "datatypes": ["data"],
+  "columns": { "temperature": "float" }
+}
