@@ -14,4 +14,4 @@ from .csv_object import Csv
 from .dataset import AtpDataset
 from .dictionary import Dict, DictDefault
 
-__version__ = version("atpdataset")
+# __version__ = version("atpdataset")
