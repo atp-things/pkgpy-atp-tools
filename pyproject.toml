@@ -14,36 +14,29 @@ enabled = true
 [project]
 name = "atpdataset"
 dynamic = ["version"]
-authors = [
-    {name = "Andraz Polak", email = "andrazpolak@gmail.com"},
-]
+authors = [{ name = "Andraz Polak", email = "andrazpolak@gmail.com" }]
 description = "Dataset manipulation tool."
 readme = "README.md"
 requires-python = '>=3.11'
-keywords = ["dataset","measurement"]
+keywords = ["dataset", "measurement"]
 classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
-dependencies = []
+dependencies = ["toml"]
 
 [project.urls]
 homepage = 'https://github.com/atp-things/pkgpy-atp-dataset'
 # documentation = ''
 repository = 'https://github.com/atp-things/pkgpy-atp-dataset'
 
-
 # [tool.setuptools]
 # include-package-data = true
-
-
 [tool.setuptools.packages.find]
 where = ["src"]
-
 # [project.scripts]
 # "versioneer" = "versioneer:main"
-
 # [tool.versioneer]
 # VCS = "git"
 # style = "pep440"

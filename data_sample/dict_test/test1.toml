@@ -1,0 +1,35 @@
+[name]
+value1 = "text 1"
+value2 = "text 2"
+
+[name2]
+list_num = [1, 2, 3, 4, 5]
+list_string = ["a", "b", "c", "d", "e"]
+list_list = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+[[name2.list_dict]]
+a = 1
+
+[[name2.list_dict]]
+b = 2
+
+[[name2.list_dict]]
+c = 3
+
+[[name2.list_dict]]
+d = 4
+
+[[name2.list_dict]]
+e = 5
+
+[name3]
+uuid = "4792eb28-3cfd-41a1-ad68-1a978f115814"
+datetime_utc = 2024-05-27T18:46:40.747225Z
+timestamp_utc = 1716835600.747363
+
+[name2.dict]
+a = 1
+b = 2
+c = 3
+d = 4
+e = 5

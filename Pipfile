@@ -17,6 +17,7 @@ pytest = "*"
 jsonschema = "*"
 pandas = "*"
 setuptools-git-versioning = "*"
+toml = "*"
 
 [dev-packages]
 
