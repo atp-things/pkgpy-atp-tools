@@ -11,7 +11,7 @@
     },
     // Bash
     {
-      "label": "Bash - package release (create git tag)",
+      "label": "Create git tag (release)",
       "type": "shell",
       "command": "./scripts/release.sh"
     },
