@@ -3,7 +3,7 @@ requires = [
     "setuptools>=42",
     "wheel",
     "black",
-    "versioneer[toml]",
+    # "versioneer[toml]",
     "setuptools-git-versioning<2"
 ]
 build-backend = "setuptools.build_meta"
@@ -28,19 +28,20 @@ dependencies = ["toml"]
 
 [project.urls]
 homepage = 'https://github.com/atp-things/pkgpy-atp-dataset'
-# documentation = ''
 repository = 'https://github.com/atp-things/pkgpy-atp-dataset'
 
 # [tool.setuptools]
 # include-package-data = true
 [tool.setuptools.packages.find]
 where = ["src"]
-# [project.scripts]
-# "versioneer" = "versioneer:main"
-# [tool.versioneer]
-# VCS = "git"
-# style = "pep440"
-# versionfile_source = "src/atpdataset/_version.py"
-# versionfile_build = "src/atpdataset/_version.py"
-# tag_prefix = "v"
-# parentdir_prefix = "atpdataset-"
+
+[project.scripts]
+"versioneer" = "versioneer:main"
+
+[tool.versioneer]
+VCS = "git"
+style = "pep440"
+versionfile_source = "src/atpdataset/_version.py"
+versionfile_build = "src/atpdataset/_version.py"
+tag_prefix = "v"
+parentdir_prefix = "atpdataset-"

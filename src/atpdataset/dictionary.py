@@ -52,6 +52,12 @@ class DictDefault(defaultdict):
     def __init__(self, *args, **kwargs):
         super().__init__(dict, *args, **kwargs)
 
+    def to_dict(self) -> dict:
+        return dict(self)
+
+    # def to_defaultdict(self) -> defaultdict:
+    #     return defaultdict(self)
+
     def to_json(
         self,
         path: str | Path | None = None,
