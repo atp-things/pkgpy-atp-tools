@@ -9,14 +9,6 @@ repos:
       - id: check-merge-conflict
       - id: check-symlinks
       - id: requirements-txt-fixer
-  - repo: https://github.com/psf/black
-    rev: 24.1.1
-    hooks:
-      - id: black
-  - repo: https://github.com/pycqa/flake8
-    rev: 7.0.0
-    hooks:
-      - id: flake8
   - repo: https://github.com/kynan/nbstripout
     rev: 0.7.1
     hooks:
@@ -25,9 +17,11 @@ repos:
     rev: v1.0.0
     hooks:
       - id: check-json5
-  - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
+
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.4.6
     hooks:
-      - id: isort
-        name: isort (python)
-        args: ["--profile", "black", "--filter-files"]
+      - id: ruff
+        args:
+          - --fix
+      - id: ruff-format

@@ -40,7 +40,7 @@ class AtpDataset:
         return self
 
     def from_csv_file(self, file_path: str | Path):
-        with open(file_path, "r") as f:
+        with open(file_path) as f:
             csv_str = f.read()
         return self.from_csv_str(csv_str)
 

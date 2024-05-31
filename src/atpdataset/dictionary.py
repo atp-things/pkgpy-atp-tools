@@ -95,17 +95,37 @@ class DictDefault(defaultdict):
             _save_string_to_file(ret, path)
         return ret
 
-    def from_json(self, path: str | Path) -> None:
-        with open(path, "r", encoding="utf-8") as file:
+    def from_file(self, path: str | Path):
+        if isinstance(path, str):
+            path = Path(path)
+
+        suffix = path.suffix
+        match suffix:
+            case ".json":
+                self.from_json(path)
+            case ".yaml" | ".yml":
+                self.from_yaml(path)
+            case ".toml":
+                self.from_toml(path)
+            case _:
+                raise ValueError("Invalid file format")
+
+        return self
+
+    def from_json(self, path: str | Path):
+        with open(path, encoding="utf-8") as file:
             self.update(json.load(file))
+        return self
 
-    def from_yaml(self, path: str | Path) -> None:
-        with open(path, "r", encoding="utf-8") as file:
+    def from_yaml(self, path: str | Path):
+        with open(path, encoding="utf-8") as file:
             self.update(yaml.safe_load(file))
+        return self
 
-    def from_toml(self, path: str | Path) -> None:
-        with open(path, "r", encoding="utf-8") as file:
+    def from_toml(self, path: str | Path):
+        with open(path, encoding="utf-8") as file:
             self.update(toml.load(file))
+        return self
 
 
 def _save_string_to_file(string: str, path: str | Path) -> None:

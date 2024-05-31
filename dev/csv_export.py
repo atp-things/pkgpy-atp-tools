@@ -1,6 +1,5 @@
-import pandas as pd
-
 import atpdataset
+import pandas as pd
 
 print("This is a test of the atpdataset package")
 print("Name:", atpdataset.__name__)

@@ -12,7 +12,7 @@ pprint(csv_files)
 
 for file_path in csv_files:
     print(file_path)
-    with open(file_path, "r") as csvfile:
+    with open(file_path) as csvfile:
         dialect = csv.Sniffer().sniff(csvfile.read(1024))
         csvfile.seek(0)
         print("Dialect: ")

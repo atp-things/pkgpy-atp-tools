@@ -17,14 +17,14 @@ with open(file_path, "w", newline="") as csvfile:
 
 
 # read data from csv
-with open(file_path, "r") as csvfile:
+with open(file_path) as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         pprint(row)
 
 
 # sniff dialect
-with open(file_path, "r") as csvfile:
+with open(file_path) as csvfile:
     dialect = csv.Sniffer().sniff(csvfile.read(1024))
     csvfile.seek(0)
     print("Dialect: ")

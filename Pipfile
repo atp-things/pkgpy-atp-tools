@@ -18,6 +18,8 @@ jsonschema = "*"
 pandas = "*"
 setuptools-git-versioning = "*"
 toml = "*"
+types-toml = "*"
+types-pyyaml = "*"
 
 [dev-packages]
 

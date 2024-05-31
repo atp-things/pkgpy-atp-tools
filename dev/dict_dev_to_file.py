@@ -15,10 +15,8 @@ def_dict["name2"]["list_dict"] = [{"a": 1}, {"b": 2}, {"c": 3}, {"d": 4}, {"e": 
 def_dict["name2"]["list_list"] = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 def_dict["name2"]["dict"] = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5}
 def_dict["name3"]["uuid"] = uuid.uuid4()
-def_dict["name3"]["datetime_utc"] = datetime.datetime.now(datetime.timezone.utc)
-def_dict["name3"]["timestamp_utc"] = datetime.datetime.now(
-    datetime.timezone.utc
-).timestamp()
+def_dict["name3"]["datetime_utc"] = datetime.datetime.now(datetime.UTC)
+def_dict["name3"]["timestamp_utc"] = datetime.datetime.now(datetime.UTC).timestamp()
 
 print(
     "def_dict [json]:",
@@ -46,8 +44,8 @@ config = Dict(
         },
         "name3": {
             "uuid": uuid.uuid4(),
-            "datetime_utc": datetime.datetime.now(datetime.timezone.utc),
-            "timestamp_utc": datetime.datetime.now(datetime.timezone.utc).timestamp(),
+            "datetime_utc": datetime.datetime.now(datetime.UTC),
+            "timestamp_utc": datetime.datetime.now(datetime.UTC).timestamp(),
         },
     }
 )

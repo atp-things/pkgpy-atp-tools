@@ -9,7 +9,7 @@ csv_object = atpdataset.Csv()
 # csv_object.read_file(file_path)
 
 
-with io.open(file_path, "rb") as f:
+with open(file_path, "rb") as f:
     data = f.read()
     # print("data type: ", type(data))
     csv_object.read_buffer(io.BytesIO(data))
