@@ -10,7 +10,6 @@ records.from_json(Path("data_sample", "records", "test1.json"))
 print("records [type]", type(records))
 pprint(records)
 
-
 print("records to dict [level 1]:")
 pprint(records.to_dict(["first_name"]))
 print("records to dict [level 2]:")

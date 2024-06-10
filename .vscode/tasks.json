@@ -30,9 +30,19 @@
     },
     // PyTest
     {
-      "label": "pytest - run",
+      "label": "pytest - all",
       "type": "shell",
-      "command": "pipenv run tests"
+      "command": "pipenv run test_all"
+    },
+    {
+      "label": "pytest - all verbose",
+      "type": "shell",
+      "command": "pipenv run test_all_verbose"
+    },
+    {
+      "label": "pytest - all parallel",
+      "type": "shell",
+      "command": "pipenv run test_all_parallel"
     }
   ]
 }

@@ -1,8 +1,16 @@
+import _ctypes
 import json
 from collections import UserList, defaultdict
 from pathlib import Path
 
+import pandas as pd
+
 from .utils import _path_suffix_check, _save_string_to_file
+
+
+def di(obj_id):
+    """Inverse of id() function."""
+    return _ctypes.PyObj_FromPtr(obj_id)
 
 
 class Records(list[dict]):
@@ -36,10 +44,18 @@ class Records(list[dict]):
     def to_dict(self, keys: list) -> defaultdict:
         ret: defaultdict = defaultdict(dict)
         for record in self:
+            p = id(ret)
             key_values = [record[key] for key in keys]
-            ret_local = record
-            for key in key_values[::-1]:
-                ret_local = {key: ret_local}
-            ret.update(ret_local)
+            key_values_len = len(key_values)
+            for i in range(key_values_len):
+                if i < key_values_len - 1:
+                    # if di(p)[key_values[i]] exists
+                    if key_values[i] not in di(p):
+                        di(p)[key_values[i]] = {}
+                    p = id(di(p)[key_values[i]])
+                else:
+                    if key_values[i] in di(p):
+                        raise ValueError("Keys should be unique in the dataset.")
+                    di(p)[key_values[i]] = record
 
         return ret
