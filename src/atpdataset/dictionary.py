@@ -5,6 +5,8 @@ from pathlib import Path
 import toml
 import yaml
 
+from .utils import _path_suffix_check, _save_string_to_file
+
 
 class Dict(dict):
     def __init__(self, *args, **kwargs):
@@ -54,6 +56,11 @@ class DictDefault(defaultdict):
 
     def to_dict(self) -> dict:
         return dict(self)
+
+    def from_dict(self, dict_: defaultdict | dict):
+        super().update(dict_)
+
+        return self
 
     # def to_defaultdict(self) -> defaultdict:
     #     return defaultdict(self)
@@ -114,31 +121,15 @@ class DictDefault(defaultdict):
 
     def from_json(self, path: str | Path):
         with open(path, encoding="utf-8") as file:
-            self.update(json.load(file))
+            super().update(json.load(file))
         return self
 
     def from_yaml(self, path: str | Path):
         with open(path, encoding="utf-8") as file:
-            self.update(yaml.safe_load(file))
+            super().update(yaml.safe_load(file))
         return self
 
     def from_toml(self, path: str | Path):
         with open(path, encoding="utf-8") as file:
-            self.update(toml.load(file))
+            super().update(toml.load(file))
         return self
-
-
-def _save_string_to_file(string: str, path: str | Path) -> None:
-    with open(path, "w", encoding="utf-8") as file:
-        file.write(string)
-
-    return
-
-
-def _path_suffix_check(path: Path | str, suffix: str) -> Path:
-    if isinstance(path, str):
-        path = Path(path)
-
-    if path.suffix != suffix:
-        path = path.with_suffix(suffix)
-    return path
