@@ -1,10 +1,10 @@
 import _ctypes
 import json
-from collections import UserList, defaultdict
 from pathlib import Path
 
 import pandas as pd
 
+from .dictionary import DictDefault
 from .utils import _path_suffix_check, _save_string_to_file
 
 
@@ -17,6 +17,17 @@ class Records(list[dict]):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+    # from
+    def from_json(self, path: str | Path):
+        with open(path, encoding="utf-8") as file:
+            super().extend(json.load(file))
+        return self
+
+    def from_dataframe(self, df: pd.DataFrame):
+        super().extend(df.to_dict(orient="records"))
+        return self
+
+    # to
     def to_list(self) -> list:
         return list(self)
 
@@ -36,13 +47,14 @@ class Records(list[dict]):
             _save_string_to_file(ret, path)
         return ret
 
-    def from_json(self, path: str | Path):
-        with open(path, encoding="utf-8") as file:
-            super().extend(json.load(file))
-        return self
+    def to_dict(self, keys: list) -> dict:
+        return self.to_dict_default(keys).to_dict()
 
-    def to_dict(self, keys: list) -> defaultdict:
-        ret: defaultdict = defaultdict(dict)
+    def to_defaultdict(self, keys: list) -> dict:
+        return self.to_dict_default(keys).to_defaultdict()
+
+    def to_dict_default(self, keys: list) -> DictDefault:
+        ret: DictDefault = DictDefault()
         for record in self:
             p = id(ret)
             key_values = [record[key] for key in keys]
@@ -59,3 +71,15 @@ class Records(list[dict]):
                     di(p)[key_values[i]] = record
 
         return ret
+
+    def to_dataframe(
+        self,
+        index: list | None = None,
+        columns: list | None = None,
+    ) -> pd.DataFrame:
+        df = pd.DataFrame(self)
+        if index is not None and len(index) > 0:
+            df.set_index(index, inplace=True)
+        if columns is not None and len(columns) > 0:
+            df = df[columns]
+        return df

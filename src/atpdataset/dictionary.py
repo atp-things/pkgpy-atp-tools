@@ -57,13 +57,12 @@ class DictDefault(defaultdict):
     def to_dict(self) -> dict:
         return dict(self)
 
+    def to_defaultdict(self) -> dict:
+        return defaultdict(dict, self)
+
     def from_dict(self, dict_: defaultdict | dict):
         super().update(dict_)
-
         return self
-
-    # def to_defaultdict(self) -> defaultdict:
-    #     return defaultdict(self)
 
     def to_json(
         self,
