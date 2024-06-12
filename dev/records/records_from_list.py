@@ -45,7 +45,6 @@ print("records to dict [level 3]:")
 dict_3 = records.to_dict_default(["first_name", "last_name", "age"])
 print("type(dict_3)", type(dict_3))
 pprint(dict_3)
-
 dict_4 = records.to_dict(["first_name", "last_name", "age"])
 print("type(dict_4)", type(dict_4))
 pprint(dict_4)

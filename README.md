@@ -2,6 +2,11 @@
 
 The python package for manipulating datasets.
 
+## URLs
+
+- [GitHub](https://github.com/atp-things/pkgpy-atp-dataset)
+- [PyPI](https://pypi.org/project/atpdataset/)
+
 ## Installation
 
 ## Keywords

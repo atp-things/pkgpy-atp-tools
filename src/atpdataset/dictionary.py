@@ -8,48 +8,6 @@ import yaml
 from .utils import _path_suffix_check, _save_string_to_file
 
 
-class Dict(dict):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def to_json(
-        self,
-        path: str | Path | None = None,
-        indent: int | None = None,
-    ) -> str:
-        ret = json.dumps(
-            dict(self),
-            default=str,
-            ensure_ascii=False,
-            indent=indent,
-        )
-        if path is not None:
-            path = _path_suffix_check(path, suffix=".json")
-            _save_string_to_file(ret, path)
-        return ret
-
-    def to_yaml(
-        self,
-        path: str | Path | None = None,
-        indent: int | None = None,
-    ) -> str:
-        ret = yaml.dump(
-            dict(self),
-            default_flow_style=False,
-            allow_unicode=True,
-            indent=indent,
-        )
-        if path is not None:
-            _save_string_to_file(ret, path)
-        return ret
-
-    def to_toml(self, path: str | Path | None = None) -> str:
-        ret = toml.dumps(dict(self))
-        if path is not None:
-            _save_string_to_file(ret, path)
-        return ret
-
-
 class DictDefault(defaultdict):
     def __init__(self, *args, **kwargs):
         super().__init__(dict, *args, **kwargs)

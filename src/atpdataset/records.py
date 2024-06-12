@@ -23,6 +23,10 @@ class Records(list[dict]):
             super().extend(json.load(file))
         return self
 
+    async def from_json_async(self):
+        # TODO: Implement async version of from_json
+        return self
+
     def from_dataframe(self, df: pd.DataFrame):
         super().extend(df.to_dict(orient="records"))
         return self
