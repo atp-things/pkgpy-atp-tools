@@ -5,7 +5,7 @@ from pathlib import Path
 import toml
 import yaml
 
-from .utils import _path_suffix_check, _save_string_to_file
+from .utils import _path_suffix_check, _save_to_file
 
 
 class DictDefault(defaultdict):
@@ -35,7 +35,7 @@ class DictDefault(defaultdict):
         )
         if path is not None:
             path = _path_suffix_check(path, suffix=".json")
-            _save_string_to_file(ret, path)
+            _save_to_file(ret, path)
         return ret
 
     def to_yaml(
@@ -50,13 +50,13 @@ class DictDefault(defaultdict):
             indent=indent,
         )
         if path is not None:
-            _save_string_to_file(ret, path)
+            _save_to_file(ret, path)
         return ret
 
     def to_toml(self, path: str | Path | None = None) -> str:
         ret = toml.dumps(dict(self))
         if path is not None:
-            _save_string_to_file(ret, path)
+            _save_to_file(ret, path)
         return ret
 
     def from_file(self, path: str | Path):

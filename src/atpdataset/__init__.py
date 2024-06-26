@@ -9,10 +9,9 @@
 
 from importlib.metadata import version
 
+from . import io
 from .csv_object import Csv
 from .dictionary import DictDefault
 from .records import Records
-
-# from .dataset import AtpDataset
 
 __version__ = version("atpdataset")

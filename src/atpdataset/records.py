@@ -1,16 +1,13 @@
-import _ctypes
 import json
 from pathlib import Path
 
 import pandas as pd
 
+from .c_py import di
 from .dictionary import DictDefault
-from .utils import _path_suffix_check, _save_string_to_file
-
-
-def di(obj_id):
-    """Inverse of id() function."""
-    return _ctypes.PyObj_FromPtr(obj_id)
+from .io.aio import load_from_file_str_async, save_to_file_async
+from .io.io import save_to_file
+from .utils import _path_suffix_check
 
 
 class Records(list[dict]):
@@ -23,8 +20,14 @@ class Records(list[dict]):
             super().extend(json.load(file))
         return self
 
-    async def from_json_async(self):
+    async def from_json_async(self, path: str | Path):
         # TODO: Implement async version of from_json
+        ret: str = await load_from_file_str_async(path)
+        self.from_string(ret)
+        return self
+
+    def from_string(self, string: str):
+        super().extend(json.loads(string))
         return self
 
     def from_dataframe(self, df: pd.DataFrame):
@@ -48,7 +51,23 @@ class Records(list[dict]):
         )
         if path is not None:
             path = _path_suffix_check(path, suffix=".json")
-            _save_string_to_file(ret, path)
+            save_to_file(ret, path)
+        return ret
+
+    async def to_json_async(
+        self,
+        path: str | Path | None = None,
+        indent: int | None = None,
+    ) -> str:
+        ret = json.dumps(
+            list(self),
+            default=str,
+            ensure_ascii=False,
+            indent=indent,
+        )
+        if path is not None:
+            path = _path_suffix_check(path, suffix=".json")
+            await save_to_file_async(ret, path)
         return ret
 
     def to_dict(self, keys: list) -> dict:
@@ -65,7 +84,6 @@ class Records(list[dict]):
             key_values_len = len(key_values)
             for i in range(key_values_len):
                 if i < key_values_len - 1:
-                    # if di(p)[key_values[i]] exists
                     if key_values[i] not in di(p):
                         di(p)[key_values[i]] = {}
                     p = id(di(p)[key_values[i]])

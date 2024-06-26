@@ -21,6 +21,7 @@ setuptools-git-versioning = "*"
 toml = "*"
 types-toml = "*"
 types-pyyaml = "*"
+aiofiles = "*"
 
 [dev-packages]
 
