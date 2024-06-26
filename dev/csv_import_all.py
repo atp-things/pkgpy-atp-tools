@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from pprint import pprint
 
-import atpdataset
+import atptools
 import pandas as pd
 
 # import all .csv files from folder data_sample
@@ -24,7 +24,7 @@ for metadata in datasets_metadata:
     with open(metadata["data_file_path"]) as f:
         ds_string = f.read()
 
-    df, _ = atpdataset.csv.csv_str_to_dataframe(ds_string)
+    df, _ = atptools.csv.csv_str_to_dataframe(ds_string)
 
     print("df:", df)
     print("df description:", df.describe().T)

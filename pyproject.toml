@@ -1,18 +1,12 @@
 [build-system]
-requires = [
-    "setuptools>=42",
-    "wheel",
-    "black",
-    # "versioneer[toml]",
-    "setuptools-git-versioning<2"
-]
+requires = ["setuptools>=42", "wheel", "black", "setuptools-git-versioning<2"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools-git-versioning]
 enabled = true
 
 [project]
-name = "atpdataset"
+name = "atptools"
 dynamic = ["version"]
 authors = [{ name = "Andraz Polak", email = "andrazpolak@gmail.com" }]
 description = "Dataset manipulation tool."
@@ -24,7 +18,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
-dependencies = ["toml", "types-toml", "types-pyyaml"]
+dependencies = ["toml", "types-toml", "types-pyyaml", "aiofiles"]
 
 [project.urls]
 homepage = 'https://github.com/atp-things/pkgpy-atp-dataset'
@@ -35,17 +29,15 @@ repository = 'https://github.com/atp-things/pkgpy-atp-dataset'
 [tool.setuptools.packages.find]
 where = ["src"]
 
-[project.scripts]
-"versioneer" = "versioneer:main"
-
-[tool.versioneer]
-VCS = "git"
-style = "pep440"
-versionfile_source = "src/atpdataset/_version.py"
-versionfile_build = "src/atpdataset/_version.py"
-tag_prefix = "v"
-parentdir_prefix = "atpdataset-"
-
+# [project.scripts]
+# "versioneer" = "versioneer:main"
+# [tool.versioneer]
+# VCS = "git"
+# style = "pep440"
+# versionfile_source = "src/atptools/_version.py"
+# versionfile_build = "src/atptools/_version.py"
+# tag_prefix = "v"
+# parentdir_prefix = "atptools-"
 [tool.ruff]
 exclude = [
     ".bzr",

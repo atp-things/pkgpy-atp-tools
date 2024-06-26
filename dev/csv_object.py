@@ -1,4 +1,4 @@
-from atpdataset import AtpDataset
+from atptools import AtpDataset
 
 # read the CSV file
 path = "data/data.csv"
