@@ -22,6 +22,7 @@ toml = "*"
 types-toml = "*"
 types-pyyaml = "*"
 aiofiles = "*"
+pandas-stubs = "*"
 
 [dev-packages]
 

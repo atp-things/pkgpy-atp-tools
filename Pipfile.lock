@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "2446858e17fcb1d12b3f1bb5cc394ceaf0766eef181d3d28ed214abdf79810de"
+            "sha256": "99484070d1a30062c8cd5ab1f5777ddf874bb1e5d1451f519f7b71090a184147"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -264,6 +264,14 @@
             ],
             "index": "pypi",
             "version": "==2.2.2"
+        },
+        "pandas-stubs": {
+            "hashes": [
+                "sha256:2dcc86e8fa6ea41535a4561c1f08b3942ba5267b464eff2e99caeee66f9e4cd1",
+                "sha256:e08ce7f602a4da2bff5a67475ba881c39f2a4d4f7fccc1cba57c6f35a379c6c0"
+            ],
+            "index": "pypi",
+            "version": "==2.2.2.240603"
         },
         "pathspec": {
             "hashes": [
@@ -569,6 +577,14 @@
             ],
             "index": "pypi",
             "version": "==0.10.2"
+        },
+        "types-pytz": {
+            "hashes": [
+                "sha256:6810c8a1f68f21fdf0f4f374a432487c77645a0ac0b31de4bf4690cf21ad3981",
+                "sha256:8335d443310e2db7b74e007414e74c4f53b67452c0cb0d228ca359ccfba59659"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==2024.1.0.20240417"
         },
         "types-pyyaml": {
             "hashes": [

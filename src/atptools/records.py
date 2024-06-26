@@ -34,6 +34,10 @@ class Records(list[dict]):
         super().extend(df.to_dict(orient="records"))
         return self
 
+    def from_csv(self, path: str | Path):
+        # TODO: Implement
+        return self
+
     # to
     def to_list(self) -> list:
         return list(self)
