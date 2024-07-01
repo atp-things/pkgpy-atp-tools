@@ -7,11 +7,11 @@
 #     __version__ = None
 #     pass
 
-from importlib.metadata import version
+# from importlib.metadata import version
 
 from . import io
 from .csv_object import Csv
 from .dictionary import DictDefault
 from .records import Records
 
-__version__ = version("atpdataset")
+# __version__ = version("atpdataset")
