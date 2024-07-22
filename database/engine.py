@@ -6,7 +6,6 @@ from sqlalchemy.orm import sessionmaker
 # TODO: Add support if DB_URL is not set
 engine = create_engine(
     os.environ["DB_URL"],
-    # echo=True,
     future=True,
 )
 DbSession = sessionmaker(

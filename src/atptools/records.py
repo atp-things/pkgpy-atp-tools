@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 import pandas as pd
+from fastapi.encoders import jsonable_encoder
 
 from .c_py import di
 from .dictionary import DictDefault
@@ -37,6 +38,26 @@ class Records(list[dict]):
     def from_csv(self, path: str | Path):
         # TODO: Implement
         return self
+
+    def from_sqlalchemy_row(self, rows: list):
+        records = []
+        for row in rows:
+            print("Row type:", type(row))
+            records.append(row._asdict())
+
+        super().extend(records)
+        return self
+
+    def from_sqlalchemy_model(self, models: list):
+        models_dict = jsonable_encoder(models)
+        super().extend(models_dict)
+        return self
+
+    def from_sqlalchemy(self, rows: list):
+        if hasattr(rows[0], "_asdict"):
+            return self.from_sqlalchemy_row(rows)
+        else:
+            return self.from_sqlalchemy_model(rows)
 
     # to
     def to_list(self) -> list:

@@ -1,25 +1,14 @@
 from datetime import datetime
-from uuid import UUID, uuid4
+from uuid import UUID
 
 from sqlalchemy import (
-    DECIMAL,
-    JSON,
-    TEXT,
-    BigInteger,
-    Column,
     DateTime,
-    Enum,
-    Float,
-    ForeignKey,
-    Index,
-    Integer,
     String,
     text,
 )
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy.sql import func
-from sqlalchemy.types import TypeDecorator
 
 
 class Base(DeclarativeBase):
