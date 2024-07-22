@@ -1,0 +1,25 @@
+services:
+  db_postgres:
+    image: postgres
+    # restart: unless-stopped
+    ports:
+      - 6000:5432
+    env_file:
+      - ./.env.docker.local
+    environment:
+      - ENVIRONMENT=production
+    volumes:
+      - volume_postgre_data_atp_tools:/var/lib/postgresql
+    networks:
+      - network_main
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5" # number of files or file count
+        max-size: "10m" # file size
+
+networks:
+  network_main:
+    external: true
+volumes:
+  volume_postgre_data_atp_tools: {}

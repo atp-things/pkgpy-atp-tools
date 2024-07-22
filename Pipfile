@@ -23,6 +23,9 @@ types-toml = "*"
 types-pyyaml = "*"
 aiofiles = "*"
 pandas-stubs = "*"
+sqlalchemy = "*"
+psycopg2-binary = "*"
+fastapi = "*"
 
 [dev-packages]
 
