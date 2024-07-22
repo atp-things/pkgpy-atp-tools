@@ -23,7 +23,8 @@ dependencies = [
     "types-toml",
     "types-pyyaml",
     "pandas-stubs",
-    "aiofiles"
+    "aiofiles",
+    "fastapi",
 ]
 
 [project.urls]

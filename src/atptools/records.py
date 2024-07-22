@@ -42,7 +42,6 @@ class Records(list[dict]):
     def from_sqlalchemy_row(self, rows: list):
         records = []
         for row in rows:
-            print("Row type:", type(row))
             records.append(row._asdict())
 
         super().extend(records)
