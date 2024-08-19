@@ -26,6 +26,8 @@ pandas-stubs = "*"
 sqlalchemy = "*"
 psycopg2-binary = "*"
 fastapi = "*"
+mypy = "*"
+pyright = "*"
 
 [dev-packages]
 
