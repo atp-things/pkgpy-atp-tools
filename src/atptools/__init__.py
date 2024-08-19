@@ -9,7 +9,7 @@
 
 # from importlib.metadata import version
 
-from . import io
+from . import dataframe, io
 from .csv_object import Csv
 from .dictionary import DictDefault
 from .records import Records
