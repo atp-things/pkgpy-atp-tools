@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class Histogram:
+class HistogramContinue:
     def __init__(
         self,
         data: list | np.ndarray,
