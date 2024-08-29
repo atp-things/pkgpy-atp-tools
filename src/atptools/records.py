@@ -118,6 +118,40 @@ class Records(list[dict]):
 
         return ret
 
+    def group_by(self, keys: list, key_as_tuple: bool = False) -> DictDefault:
+        if key_as_tuple:
+            return self._group_by_tuplekey(keys)
+        else:
+            return self._group_by_hierarchy(keys)
+
+    def _group_by_tuplekey(self, keys: list) -> DictDefault:
+        ret = DictDefault()
+        for record in self:
+            key_values = tuple([record[key] for key in keys])
+            if key_values not in ret:
+                ret[key_values] = []
+            ret[key_values].append(record)
+
+        return ret
+
+    def _group_by_hierarchy(self, keys: list) -> DictDefault:
+        ret = DictDefault()
+        for record in self:
+            p = id(ret)
+            key_values = [record[key] for key in keys]
+            key_values_len = len(key_values)
+            for i in range(key_values_len):
+                if i < key_values_len - 1:
+                    if key_values[i] not in di(p):
+                        di(p)[key_values[i]] = {}
+                    p = id(di(p)[key_values[i]])
+                else:
+                    if key_values[i] not in di(p):
+                        di(p)[key_values[i]] = []
+                    (di(p)[key_values[i]]).append(record)
+
+        return ret
+
     def to_dataframe(
         self,
         index: list | None = None,
