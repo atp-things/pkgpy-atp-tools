@@ -1,37 +1,42 @@
-import json
-
 import pandas as pd
+
+from ..dictionary import DictDefault
 
 
 def df_description_str(df: pd.DataFrame) -> str:
     number_of_coluumns = len(df.columns)
-    df_describe_str = df.describe(include="all").T.to_string()
-    df_describe_str = "  " + df_describe_str.replace("\n", "\n  ")
-    df_types_str = df.dtypes.to_string()
-    df_types_str = "  " + df_types_str.replace("\n", "\n  ")
 
     string: str = ""
-    string += "Dataframe:"
-    string += f"\n Shape: {df.shape}"
+    string += "DataFrame describe [start]: -------------------------------------------"
+    string += f"\nShape: {df.shape}"
+    string += f"\nColumns [{number_of_coluumns}]:\n{df.columns}"
+    string += f"\nRows [{len(df.index)}]:\n{df.index}"
+    string += f"\nHead:\n{df.head()}"
+    string += f"\nTail:\n{df.tail()}"
 
-    string += f"\n Columns [{number_of_coluumns}]: {df.columns}"
-    string += f"\n Rows [{len(df.index)}]: {df.index}"
-
-    string += f"\n Count NaN:\n{df.isna().sum()}"
-
-    string += f"\n Describe:\n{df_describe_str}"
-    string += f"\n dtpes:\n{df_types_str}"
-
+    string += f"\nDescribe:\n{df_describe(df)}"
+    string += (
+        "\nDataFrame describe [end]: ---------------------------------------------"
+    )
     return string
 
 
-def df_description_json(df: pd.DataFrame) -> dict:
-    df_describe_json = dict(json.loads(df.describe().to_json()))
-    return df_describe_json
+def df_description_dict_default(df: pd.DataFrame) -> DictDefault:
+    ret = DictDefault()
+    ret["shape"] = df.shape
+    ret["columns"] = df.columns.tolist()
+    ret["index"] = df.index.tolist()
+    df_des = df_describe(df)
+    ret["describe"] = df_des.to_dict(orient="index")
+
+    return ret
 
 
-def df_description_markdown(df: pd.DataFrame) -> str:
-    # TODO: dependency tabulate
-    df_describe_markdown = df.describe().T.to_markdown()
-
-    return df_describe_markdown
+def df_describe(df: pd.DataFrame) -> pd.DataFrame:
+    df_describe = df.describe(include="all").T
+    df_nan_count = df.isna().sum()
+    df_nan_count.name = "count_nan"
+    df_dtypes = df.dtypes
+    df_dtypes.name = "dtypes"
+    df_dtypes.astype(str)
+    return pd.concat([df_describe, df_nan_count, df_dtypes], axis=1)
