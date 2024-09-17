@@ -118,6 +118,12 @@ class Records(list[dict]):
 
         return ret
 
+    def to_list_by_key(self, key: str) -> list:
+        ret = []
+        for record in self:
+            ret.append(record[key])
+        return ret
+
     def group_by(self, keys: list, key_as_tuple: bool = False) -> DictDefault:
         if key_as_tuple:
             return self._group_by_tuplekey(keys)
