@@ -27,4 +27,37 @@ pipenv install atptools
 
 ### DictDefault
 
+### Dataset
+
+Dataset is collection of data.
+Variable (name of data point):
+Records: Collection of data points.
+Data point: Single piece of information. Temperature, humidity, location etc.
+
+### Dataset Timeseries
+
+#### Metadata
+
+- dataset:
+  - uuid
+  - name
+  - description
+  - source
+  - variables:
+
+#### Longformat
+
+columns:
+
+- datetime or timestamp (index)
+- variable
+- value (if different valuetypes cast to string)
+
+#### Wideformat
+
+columns:
+
+- datetime or timestamp (index)
+- columns for each variable (with valuetype)
+
 ### Csv

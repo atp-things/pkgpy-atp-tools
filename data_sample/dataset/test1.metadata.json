@@ -1,0 +1,16 @@
+{
+  "name": "Data sample",
+  "manufacturer": "UNI-T",
+  "model": "UT330C",
+  "description": "USB Series Dataloggers",
+  "datatypes": ["data"],
+  "columns": {
+    "NO.": { "index": true, "datatype": "int" },
+    "DateTime": { "datatype": "datetime", "format": "YYYY-MM-DD HH:mm:ss" },
+    "�C": { "name": "Temperature", "unit": "°C", "datatype": "float" },
+    "%RH": { "name": "Relative humidity", "unit": "%", "datatype": "float" },
+    "hPa": { "name": "Pressure", "unit": "hPa", "datatype": "float" },
+    "DP": { "name": "Dew point", "unit": "°C", "datatype": "float" },
+    "�F": { "name": "Temperature", "unit": "°F", "datatype": "float" }
+  }
+}
