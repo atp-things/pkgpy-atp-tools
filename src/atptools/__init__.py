@@ -11,7 +11,7 @@
 
 from . import dataframe, io
 from .csv_object import Csv
-from .dictionary import DictDefault
+from .dict_default import DictDefault
 from .histogram import HistogramContinue
 from .records import Records
 # __version__ = version("atpdataset")

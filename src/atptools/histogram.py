@@ -45,7 +45,11 @@ class HistogramContinue:
         )
         return None
 
-    def get_histogram(self, density: bool = False, percentage: bool = False):
+    def get_histogram(
+        self,
+        density: bool = False,
+        percentage: bool = False,
+    ) -> tuple[np.ndarray, np.ndarray]:
         if self.bins is None:
             raise ValueError("bins must be set")
         if density is False and percentage is True:

@@ -1,6 +1,6 @@
 import pandas as pd
 
-from ..dictionary import DictDefault
+from ..dict_default import DictDefault
 
 
 def df_description_str(df: pd.DataFrame) -> str:
