@@ -5,7 +5,7 @@ import pandas as pd
 from fastapi.encoders import jsonable_encoder
 
 from .c_py import di
-from .dictionary import DictDefault
+from .dict_default import DictDefault
 from .io.aio import load_from_file_str_async, save_to_file_async
 from .io.io import save_to_file
 from .utils import _path_suffix_check
@@ -36,7 +36,8 @@ class Records(list[dict]):
         return self
 
     def from_csv(self, path: str | Path):
-        # TODO: Implement
+        df = pd.read_csv(path)
+        self.from_dataframe(df)
         return self
 
     def from_sqlalchemy_row(self, rows: list):
