@@ -1,7 +1,5 @@
 import datetime as dt
 import uuid
-from collections import defaultdict
-from pathlib import Path
 
 import pandas as pd
 
@@ -9,7 +7,7 @@ from .dict_default import DictDefault
 from .records import Records
 
 
-class DatasetTsLong:
+class AtpDatasetTsLong:
     def __init__(
         self,
         name: str | None = None,
@@ -27,7 +25,7 @@ class DatasetTsLong:
         self.metadata["series"] = {}
         return
 
-    def init_dataframe(self) -> "DatasetTsLong":
+    def init_dataframe(self) -> "AtpDatasetTsLong":
         self.df: pd.DataFrame = pd.DataFrame(columns=["datetime", "name", "value"])
         self.df.set_index(["datetime"], inplace=True)
         return self
@@ -81,7 +79,7 @@ class DatasetTsLong:
     def to_dataframe(self) -> pd.DataFrame:
         return self.df
 
-    def empty_data(self) -> "DatasetTsLong":
+    def empty_data(self) -> "AtpDatasetTsLong":
         del self.df
         self.init_dataframe()
         return self

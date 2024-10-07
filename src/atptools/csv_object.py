@@ -1,17 +1,25 @@
 import io
 from pathlib import Path
-from pprint import pprint
 
 import pandas as pd
 
+from .dict_default import DictDefault
+
 
 class Csv:
-    def __init__(self):
+    def __init__(
+        self,
+        df: pd.DataFrame | None = None,
+        metadata: DictDefault = DictDefault(),
+    ):
+        self.df: pd.DataFrame | None = df
+        self.metadata: DictDefault = metadata
+
         self.file_path: Path | None = None
         self.file_name: str | None = None
-        self.metadata: dict = {}
+
         self.columns: list[str] = []
-        self.df: pd.DataFrame | None = None
+
         self.buffer: bytes | None = None
 
     def read_file(self, file_path: Path):

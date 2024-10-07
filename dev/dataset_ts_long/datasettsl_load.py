@@ -6,7 +6,7 @@ import pandas as pd
 
 df = pd.read_csv(Path("data_sample", "dataset_ts_long", "test1.csv"))
 
-datset_stl = atptools.DatasetTsLong()
+datset_stl = atptools.AtpDatasetTsLong()
 print("df1")
 print(datset_stl.df)
 datset_stl.add_dataframe(df, name_col="id")

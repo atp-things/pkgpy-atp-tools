@@ -4,6 +4,7 @@ from pathlib import Path
 import pandas as pd
 
 from .csv import csv_str_to_dataframe, dataframe_to_csv_str
+from .csv_object import Csv
 
 
 class AtpDataset:
@@ -35,6 +36,11 @@ class AtpDataset:
         return
 
     # Imports
+    def from_csv_object(self, csv_obj: Csv) -> "AtpDataset":
+        self.df = csv_obj.df
+        self.metadata = csv_obj.metadata
+        return self
+
     def from_csv_str(self, csv_str: str):
         self.df, self.metadata = csv_str_to_dataframe(csv_str)
         return self
@@ -45,6 +51,12 @@ class AtpDataset:
         return self.from_csv_str(csv_str)
 
     # Exports
+    def to_csv_object(self) -> Csv:
+        csv_obj = Csv()
+        csv_obj.df = self.df
+        csv_obj.metadata = self.metadata
+        return csv_obj
+
     def to_csv_str(self) -> str:
         return dataframe_to_csv_str(self.df, self.metadata)
 

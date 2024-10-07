@@ -11,9 +11,15 @@ from .io.io import save_to_file
 from .utils import _path_suffix_check
 
 
-class Records(list[dict]):
-    def __init__(self, *args, **kwargs):
+class Records(list[DictDefault]):
+    def __init__(self, data: list | None = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        if data is not None:
+            for arg in data:
+                if isinstance(arg, DictDefault):
+                    self.append(arg)
+                else:
+                    self.append(DictDefault(arg))
 
     # from
     def from_json(self, path: str | Path):
@@ -170,3 +176,11 @@ class Records(list[dict]):
         if columns is not None and len(columns) > 0:
             df = df[columns]
         return df
+
+    def to_vectors(self, keys: list, flatten: bool = False) -> list:
+        values = []
+
+        for record in self:
+            value_list = record.to_vector(keys, flatten)
+            values.append(value_list)
+        return values

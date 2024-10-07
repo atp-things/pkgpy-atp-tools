@@ -11,7 +11,7 @@
 
 from . import dataframe, io
 from .csv_object import Csv
-from .dataset_ts_long import DatasetTsLong
+from .dataset_ts_long import AtpDatasetTsLong
 from .dict_default import DictDefault
 from .histogram import HistogramContinue
 from .records import Records

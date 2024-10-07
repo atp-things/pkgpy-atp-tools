@@ -91,3 +91,36 @@ class DictDefault(defaultdict):
         with open(path, encoding="utf-8") as file:
             super().update(toml.load(file))
         return self
+
+    def to_vector(
+        self,
+        keys: list | None = None,
+        flatten: bool = False,
+    ) -> list:
+        if keys is None:
+            return list(self.keys()), list(self.values())
+
+        values = []
+
+        for key in keys:
+            # if key is a list, then it is a nested key
+            if isinstance(key, list):
+                subvalue = self[key[0]]
+                for k in key[1:]:
+                    subvalue = subvalue[k]
+                values.append(subvalue)
+            else:
+                values.append(self[key])
+
+        if flatten:
+            # flatten only one level
+            values_new = []
+            for value in values:
+                if isinstance(value, list):
+                    values_new.extend(value)
+                else:
+                    values_new.append(value)
+
+            values = values_new
+
+        return values
