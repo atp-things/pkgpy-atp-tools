@@ -60,6 +60,8 @@ class Records(list[DictDefault]):
         return self
 
     def from_sqlalchemy(self, rows: list):
+        if len(rows) == 0:
+            raise ValueError("No data to convert.")
         if hasattr(rows[0], "_asdict"):
             return self.from_sqlalchemy_row(rows)
         else:
