@@ -103,7 +103,22 @@ class DictDefault(defaultdict):
         self,
         keys: list | None = None,
         flatten: bool = False,
-    ) -> list:
+    ) -> list | tuple[list, list]:
+        """Converts the dictionary to a vector
+
+        Parameters
+        ----------
+        keys : list | None, optional
+            Keys to be converted into vector, by default None
+        flatten : bool, optional
+            Flatten lists, by default False
+
+        Returns
+        -------
+        list | tuple[list, list]
+            if keys is None, returns a tuple of keys and values
+            if keys is not None, returns a list of values
+        """
         if keys is None:
             return list(self.keys()), list(self.values())
 

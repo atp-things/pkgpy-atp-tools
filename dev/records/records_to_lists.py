@@ -44,3 +44,6 @@ pprint(records)
 keys = ["first_name", "list", "age", ["value1", "value2"], "email"]
 vectors = records.to_vectors(keys=keys, flatten=True)
 pprint(vectors)
+
+vectors2 = records.to_vectors()
+pprint(vectors2)
