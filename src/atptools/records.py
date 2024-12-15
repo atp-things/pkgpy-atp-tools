@@ -38,7 +38,8 @@ class Records(list[DictDefault]):
         return self
 
     def from_dataframe(self, df: pd.DataFrame):
-        super().extend(df.to_dict(orient="records"))
+        records_dict: list = df.to_dict(orient="records")
+        super().extend(records_dict)
         return self
 
     def from_csv(self, path: str | Path):
