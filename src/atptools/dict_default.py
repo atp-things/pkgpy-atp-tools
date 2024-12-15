@@ -92,6 +92,13 @@ class DictDefault(defaultdict):
             super().update(toml.load(file))
         return self
 
+    def rename_keys(self, rename_dict: dict) -> dict:
+        # TODO: #14 add support for nested keys
+        for key, value in rename_dict.items():
+            if key in self:
+                self[value] = self.pop(key)
+        return self
+
     def to_vector(
         self,
         keys: list | None = None,
