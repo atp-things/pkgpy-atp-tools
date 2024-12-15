@@ -187,3 +187,9 @@ class Records(list[DictDefault]):
             value_list = record.to_vector(keys, flatten)
             values.append(value_list)
         return values
+
+    def rename_keys(self, rename_dict: dict):
+        # TODO: add support for nested keys
+        for record in self:
+            record.rename_keys(rename_dict)
+        return self
