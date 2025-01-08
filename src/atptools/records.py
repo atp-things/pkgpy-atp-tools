@@ -184,6 +184,8 @@ class Records(list[DictDefault]):
         values = []
 
         for record in self:
+            if not isinstance(record, DictDefault):
+                record = DictDefault(record)
             value_list = record.to_vector(keys, flatten)
             values.append(value_list)
         return values
