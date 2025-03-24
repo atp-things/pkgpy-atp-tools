@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pandas as pd
 from fastapi.encoders import jsonable_encoder
+from pydantic import BaseModel, TypeAdapter
 
 from .c_py import di
 from .dict_default import DictDefault
@@ -12,8 +13,16 @@ from .utils import _path_suffix_check
 
 
 class Records(list[DictDefault]):
-    def __init__(self, data: list | None = None, *args, **kwargs):
+    def __init__(
+        self,
+        data: list | None = None,
+        pydantic_model=None,
+        *args,
+        **kwargs,
+    ):
         super().__init__(*args, **kwargs)
+
+        self._pydantic_model = pydantic_model
         if data is not None:
             for arg in data:
                 if isinstance(arg, DictDefault):
@@ -21,33 +30,53 @@ class Records(list[DictDefault]):
                 else:
                     self.append(DictDefault(arg))
 
+        # validate pydantic model
+        if self._pydantic_model is not None:
+            self.validate_pydantic()
+
+    def validate_pydantic(self, pydantic_model=None) -> "Records":
+        if pydantic_model is not None:
+            self._pydantic_model = pydantic_model
+
+        if self._pydantic_model is None:
+            raise ValueError("Pydantic model is not defined.")
+        if not issubclass(self._pydantic_model, BaseModel):
+            raise ValueError("Invalid Pydantic model.")
+
+        # validate pydantic model
+        ta = TypeAdapter(list[self._pydantic_model])
+        ta.validate_python(self)
+        # for record in self:
+        #     self._pydantic_model.model_validate(record)
+        return self
+
     # from
-    def from_json(self, path: str | Path):
+    def from_json(self, path: str | Path) -> "Records":
         with open(path, encoding="utf-8") as file:
             super().extend(json.load(file))
         return self
 
-    async def from_json_async(self, path: str | Path):
+    async def from_json_async(self, path: str | Path) -> "Records":
         # TODO: Implement async version of from_json
         ret: str = await load_from_file_str_async(path)
         self.from_string(ret)
         return self
 
-    def from_string(self, string: str):
+    def from_string(self, string: str) -> "Records":
         super().extend(json.loads(string))
         return self
 
-    def from_dataframe(self, df: pd.DataFrame):
+    def from_dataframe(self, df: pd.DataFrame) -> "Records":
         records_dict: list = df.to_dict(orient="records")
         super().extend(records_dict)
         return self
 
-    def from_csv(self, path: str | Path):
+    def from_csv(self, path: str | Path) -> "Records":
         df = pd.read_csv(path)
         self.from_dataframe(df)
         return self
 
-    def from_sqlalchemy_row(self, rows: list):
+    def from_sqlalchemy_row(self, rows: list) -> "Records":
         records = []
         for row in rows:
             records.append(row._asdict())
@@ -55,12 +84,12 @@ class Records(list[DictDefault]):
         super().extend(records)
         return self
 
-    def from_sqlalchemy_model(self, models: list):
+    def from_sqlalchemy_model(self, models: list) -> "Records":
         models_dict = jsonable_encoder(models)
         super().extend(models_dict)
         return self
 
-    def from_sqlalchemy(self, rows: list):
+    def from_sqlalchemy(self, rows: list) -> "Records":
         if len(rows) == 0:
             raise ValueError("No data to convert.")
         if hasattr(rows[0], "_asdict"):

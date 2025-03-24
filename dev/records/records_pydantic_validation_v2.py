@@ -1,11 +1,11 @@
 from pprint import pprint
 
-from pydantic import BaseModel
+from pydantic import BaseModel, TypeAdapter
 
 from atptools import Records
 
 
-class RecordPydantic(BaseModel):
+class User(BaseModel):
     first_name: str
     last_name: str
     age: int
@@ -39,8 +39,12 @@ record_list: list[dict] = [
     },
 ]
 
-records_1 = Records(record_list, pydantic_model=RecordPydantic)
+
+# ta = TypeAdapter(list[User])
+# records = ta.validate_python(record_list)
+# pprint(records)
 
 
+records_1 = Records(record_list, pydantic_model=User)
 records_2 = Records(record_list)
-records_2.validate_pydantic(pydantic_model=RecordPydantic)
+records_2.validate_pydantic(pydantic_model=User)
