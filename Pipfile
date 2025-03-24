@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-# tools
 setuptools = "*"
 build = "*"
 pre-commit = "*"
@@ -29,6 +28,7 @@ fastapi = "*"
 mypy = "*"
 pyright = "*"
 tabulate = "*"
+pydantic = "*"
 
 [dev-packages]
 
