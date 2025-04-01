@@ -35,7 +35,7 @@ def pandas_counter_reset_detector(
 
     #  find the indexes where the counter resets
     df_reset_first = df_diff < 0
-    df_reset_last = df_reset_first.shift(-1).astype(bool)
+    df_reset_last = df_reset_first.shift(-1).fillna(False)
 
     # get vector of indexes where the counter resets
     df_reset_first_index = df_reset_first[df_reset_first].index
