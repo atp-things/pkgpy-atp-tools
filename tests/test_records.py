@@ -1,4 +1,5 @@
 import pytest
+
 from atptools import Records
 
 record_list: list[dict] = [
