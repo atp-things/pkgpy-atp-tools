@@ -23,7 +23,7 @@ jobs:
       id-token: write
     environment:
       name: pypi
-      url: https://pypi.org/project/atpdataset/
+      url: https://pypi.org/project/atptools/
 
     steps:
       - uses: actions/checkout@v4
