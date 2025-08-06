@@ -8,6 +8,12 @@
       "label": "PyPIPackage - build",
       "type": "shell",
       "command": "pipenv run python -m build"
+    },
+    // Bash - scripts
+    {
+      "label": "release - create (run scripts/release.sh)",
+      "type": "shell",
+      "command": "./scripts/release.sh"
     }
   ]
 }
