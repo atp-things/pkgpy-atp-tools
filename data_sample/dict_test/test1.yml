@@ -1,0 +1,42 @@
+name:
+  value1: text 1
+  value2: text 2
+name2:
+  dict:
+    a: 1
+    b: 2
+    c: 3
+    d: 4
+    e: 5
+  list_dict:
+    - a: 1
+    - b: 2
+    - c: 3
+    - d: 4
+    - e: 5
+  list_list:
+    - - 1
+      - 2
+      - 3
+    - - 4
+      - 5
+      - 6
+    - - 7
+      - 8
+      - 9
+  list_num:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+  list_string:
+    - a
+    - b
+    - c
+    - d
+    - e
+name3:
+  datetime_utc: 2024-05-27 18:46:40.747225+00:00
+  timestamp_utc: 1716835600.747363
+  uuid: 4792eb28-3cfd-41a1-ad68-1a978f115814

@@ -2,7 +2,6 @@ import asyncio
 from pprint import pprint
 
 from atptools import Records
-
 from database import DbSession
 from database.models import User
 
@@ -15,11 +14,15 @@ async def main():
 
     # read measurements
     with DbSession() as db:
-        users = db.query(User).all()
+        users = db.query(
+            User.email,
+            User.name,
+        ).all()
         records = Records()
-        records.from_sqlalchemy_model(users)
+        records.from_sqlalchemy_row(users)
 
-        print("users [type]:", type(records))
+        print("users_jsonable [type]:", type(records))
+
         for user in records:
             print("Row type:", type(user))
 

@@ -1,8 +1,9 @@
 import io
 from pprint import pprint
 
-import atptools
 import pandas as pd
+
+import atptools
 
 # read the CSV file
 with open("data/data.csv") as f:
