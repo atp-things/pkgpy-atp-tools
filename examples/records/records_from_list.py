@@ -1,7 +1,6 @@
-from pathlib import Path
 from pprint import pprint
 
-from atptools import DictDefault, Records
+from atptools import Records
 
 record_list: list[dict] = [
     {

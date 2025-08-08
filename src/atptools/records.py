@@ -1,4 +1,5 @@
 import json
+from collections import defaultdict
 from pathlib import Path
 
 import pandas as pd
@@ -7,8 +8,12 @@ from pydantic import BaseModel, TypeAdapter
 
 from .c_py import di
 from .dict_default import DictDefault
-from .io.aio import load_from_file_str_async, save_to_file_async
-from .io.io import save_to_file
+from .io import (
+    load_from_file_str,
+    load_from_file_str_async,
+    save_to_file,
+    save_to_file_async,
+)
 from .utils import _path_suffix_check
 
 
@@ -50,20 +55,19 @@ class Records(list[DictDefault]):
         #     self._pydantic_model.model_validate(record)
         return self
 
-    # from
-    def from_json(self, path: str | Path) -> "Records":
-        with open(path, encoding="utf-8") as file:
-            super().extend(json.load(file))
+    # Import from ---------------------------------------------
+    def from_string(self, string: str) -> "Records":
+        super().extend(json.loads(string))
         return self
 
-    async def from_json_async(self, path: str | Path) -> "Records":
-        # TODO: Implement async version of from_json
-        ret: str = await load_from_file_str_async(path)
+    def from_json(self, path: str | Path) -> "Records":
+        ret: str = load_from_file_str(path)
         self.from_string(ret)
         return self
 
-    def from_string(self, string: str) -> "Records":
-        super().extend(json.loads(string))
+    async def from_json_async(self, path: str | Path) -> "Records":
+        ret: str = await load_from_file_str_async(path)
+        self.from_string(ret)
         return self
 
     def from_dataframe(self, df: pd.DataFrame) -> "Records":
@@ -97,9 +101,19 @@ class Records(list[DictDefault]):
         else:
             return self.from_sqlalchemy_model(rows)
 
-    # to
-    def to_list(self) -> list:
-        return list(self)
+    async def from_azure_blob_async(self):
+        # TODO: #30 Implement async version of from_azure_blob
+        raise NotImplementedError("Azure Blob Storage not implemented yet.")
+
+    async def from_s3_async(self):
+        # TODO: #31 Implement async version of from_s3
+        raise NotImplementedError("S3 Storage not implemented yet.")
+
+    async def from_db_async(self, db, query: str) -> "Records":
+        # TODO: #32 Implement async version of from_db
+        raise NotImplementedError("Database not implemented yet.")
+
+    # Export to ---------------------------------------------------------
 
     def to_json(
         self,
@@ -133,10 +147,26 @@ class Records(list[DictDefault]):
             await save_to_file_async(ret, path)
         return ret
 
+    async def to_azure_blob_async(self):
+        # TODO: #30 Implement async version of from_azure_blob
+        raise NotImplementedError("Azure Blob Storage not implemented yet.")
+
+    async def to_s3_async(self):
+        # TODO: #31 Implement async version of from_s3
+        raise NotImplementedError("S3 Storage not implemented yet.")
+
+    async def to_db_async(self, db, query: str) -> "Records":
+        # TODO: #32 Implement async version of from_db
+        raise NotImplementedError("Database not implemented yet.")
+
+    # Basic exports --------------------------------------
+    def to_list(self) -> list:
+        return list(self)
+
     def to_dict(self, keys: list) -> dict:
         return self.to_dict_default(keys).to_dict()
 
-    def to_defaultdict(self, keys: list) -> dict:
+    def to_defaultdict(self, keys: list) -> defaultdict:
         return self.to_dict_default(keys).to_defaultdict()
 
     def to_dict_default(self, keys: list) -> DictDefault:
