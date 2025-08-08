@@ -21,7 +21,7 @@ class DictDefault(defaultdict):
     def to_dict(self) -> dict:
         return dict(self)
 
-    def to_defaultdict(self) -> dict:
+    def to_defaultdict(self) -> defaultdict:
         return defaultdict(dict, self)
 
     def from_dict(self, dict_: defaultdict | dict):

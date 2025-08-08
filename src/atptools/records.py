@@ -1,4 +1,5 @@
 import json
+from collections import defaultdict
 from pathlib import Path
 
 import pandas as pd
@@ -113,8 +114,6 @@ class Records(list[DictDefault]):
         raise NotImplementedError("Database not implemented yet.")
 
     # Export to ---------------------------------------------------------
-    def to_list(self) -> list:
-        return list(self)
 
     def to_json(
         self,
@@ -148,10 +147,26 @@ class Records(list[DictDefault]):
             await save_to_file_async(ret, path)
         return ret
 
+    async def to_azure_blob_async(self):
+        # TODO: #30 Implement async version of from_azure_blob
+        raise NotImplementedError("Azure Blob Storage not implemented yet.")
+
+    async def to_s3_async(self):
+        # TODO: #31 Implement async version of from_s3
+        raise NotImplementedError("S3 Storage not implemented yet.")
+
+    async def to_db_async(self, db, query: str) -> "Records":
+        # TODO: #32 Implement async version of from_db
+        raise NotImplementedError("Database not implemented yet.")
+
+    # Basic exports --------------------------------------
+    def to_list(self) -> list:
+        return list(self)
+
     def to_dict(self, keys: list) -> dict:
         return self.to_dict_default(keys).to_dict()
 
-    def to_defaultdict(self, keys: list) -> dict:
+    def to_defaultdict(self, keys: list) -> defaultdict:
         return self.to_dict_default(keys).to_defaultdict()
 
     def to_dict_default(self, keys: list) -> DictDefault:
