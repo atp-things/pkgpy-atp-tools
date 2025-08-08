@@ -13,7 +13,7 @@
     {
       "label": "release - create (run scripts/release.sh)",
       "type": "shell",
-      "command": "./scripts/release.sh"
+      "command": "source ./scripts/release.sh"
     }
   ]
 }
